@@ -15,6 +15,9 @@ def fullTriangle():
       s+1
     s=0
     print()
+
+
+
 def halfR():
   s=0
   for i in range(height):
@@ -25,8 +28,20 @@ def halfR():
       s+=1
     s=0
     print()
+
+def PositiveHeight():
+  fullTriangle()
+  halfL()
+  halfR()
+def NegativeHeight():
+
+
+if height >= 2 :
+  PositiveHeight()
+  elif height <= -2 :
+    NegativeHeight()
+  else :
+    break
+  
   
 
-fullTriangle()
-halfL()
-halfR()
