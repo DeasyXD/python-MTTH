@@ -15,9 +15,6 @@ def fullTriangle():
       s+1
     s=0
     print()
-
-
-
 def halfR():
   s=0
   for i in range(height):
