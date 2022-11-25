@@ -1,28 +1,66 @@
-from re import X
-from tkinter.font import BOLD
-import numpy as np
+def main():
+    board = []
+    for i in range(8):
+        board.append(["◻"] * 8)
 
-Plot = input("Plot : ") 
-AforTable = "ABCDEFGH"
-NforTable = "12345678"
+    # place first queen
+    row = int(input("Enter row: "))
+    col = int(input("Enter col: "))
+    board[row - 1][col - 1] = "♛"
 
-FirstA = AforTable.find(Plot[0])  + 1
-SecondN = NforTable.find(Plot[1]) + 1
+    # place_queens จะ return True ถ้าเจอว่าสามารถวางได้ แต่ถ้าไม่สามารถวางได้จะ return False 
+    place_queens(board, 1) # 1 คือจำนวนครั้งที่เราได้วาง queen ไว้แล้ว
 
-print(FirstA,SecondN)
+    # print board
+    for i in range(8):
+        for j in range(8):
+            print(board[i][j], end=" ")
+        print()
 
-def printcheckboard(n):
 
-    print("board : ")
-  
-    x = np.zeros((n, n), dtype = object)
-    
-    for i in range(n):
-        for j in range(n):
-            x[i][j] = int(NforTable[i] + NforTable[j])
-            
-    print(x)
-    print(Plot +" : " + str(x[(FirstA-1)][(SecondN-1)]))
+def place_queens(board, queen_num):
 
-n = 8
-printcheckboard(n)
+    # base case
+    # ถ้าวาง queen ได้ 8 ตัวแล้ว จะ return True
+    if queen_num == 8:
+        return True
+
+    # place queen
+    for i in range(8):
+        for j in range(8):
+            if board[i][j] == "◻":
+                if is_safe(board, i, j):
+                    board[i][j] = "♛"
+                    if place_queens(board, queen_num + 1):
+                        return True
+                    board[i][j] = "◻"
+
+    return False
+
+
+def is_safe(board, row, col):
+
+    # check row
+    for i in range(8):
+        if board[row][i] == "♛":
+            return False
+
+    # check column
+    for i in range(8):
+        if board[i][col] == "♛":
+            return False
+
+    # check diagonal
+    for i in range(8):
+        for j in range(8):
+            if board[i][j] == "♛":
+                if abs(row - i) == abs(col - j): # เช็คว่าอยู่ในเส้นทแยงมุมไหม ถ้าใช่จะมีค่าเท่ากัน แต่ถ้าไม่ใช่จะมีค่าไม่เท่ากัน และมีค่าต่างกันเท่ากับระยะห่างของแถวและคอลัมน์
+                    return False
+
+    return True
+
+
+# ↓↓↓ ไปเจอมาใน youtube ครับ ↓↓↓
+if __name__ == "__main__":
+    main()
+
