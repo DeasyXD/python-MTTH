@@ -6,7 +6,7 @@ def main():
     # place first queen
     row = int(input("Enter row: "))
     col = int(input("Enter col: "))
-    board[row - 1][col - 1] = "♛"
+    board[row - 1][col - 1] = "Q"
 
     # place_queens จะ return True ถ้าเจอว่าสามารถวางได้ แต่ถ้าไม่สามารถวางได้จะ return False 
     place_queens(board, 1) # 1 คือจำนวนครั้งที่เราได้วาง queen ไว้แล้ว
@@ -30,7 +30,7 @@ def place_queens(board, queen_num):
         for j in range(8):
             if board[i][j] == "◻":
                 if is_safe(board, i, j):
-                    board[i][j] = "♛"
+                    board[i][j] = "Q"
                     if place_queens(board, queen_num + 1):
                         return True
                     board[i][j] = "◻"
@@ -42,18 +42,18 @@ def is_safe(board, row, col):
 
     # check row
     for i in range(8):
-        if board[row][i] == "♛":
+        if board[row][i] == "Q":
             return False
 
     # check column
     for i in range(8):
-        if board[i][col] == "♛":
+        if board[i][col] == "Q":
             return False
 
     # check diagonal
     for i in range(8):
         for j in range(8):
-            if board[i][j] == "♛":
+            if board[i][j] == "Q":
                 if abs(row - i) == abs(col - j): # เช็คว่าอยู่ในเส้นทแยงมุมไหม ถ้าใช่จะมีค่าเท่ากัน แต่ถ้าไม่ใช่จะมีค่าไม่เท่ากัน และมีค่าต่างกันเท่ากับระยะห่างของแถวและคอลัมน์
                     return False
 
