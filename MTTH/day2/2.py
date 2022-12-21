@@ -21,7 +21,7 @@ def Check(n):
     Max = 0
     l = 0
     Max_time = 0
-    Ath = 0
+    thisLst=[]
 
     for i in range(len(SumTable)):
         if SumTable[i] > l :
@@ -29,14 +29,14 @@ def Check(n):
             Max = i
     
     for i in range(k):
-        for j in range(len(my_list[i])):
-            if my_list[Max][i] >= my_list[i][j]:
-                Max_time += 1
-
-    return l,Max_time 
+      for j in range (N):
+        print(my_list[j][i])
+        if my_list[Max][i] >= my_list[j][i]:
+          Max_time += 1
+    print(l)
+    print(Max_time - (N-1)*k)
     
 
-print(Check(SumTable))
-
+Check(SumTable)
 
 
