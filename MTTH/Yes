@@ -1,0 +1,36 @@
+def longest_common_substring(str1, str2):
+    m = len(str1)
+    n = len(str2)
+
+    # Create a table to store lengths of the common suffixes
+    # dp[i][j] will store the length of the common suffix of str1[0...i-1] and str2[0...j-1]
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    # Variable to store the length of the longest common substring
+    max_len = 0
+
+    # Variable to store the ending index of the longest common substring in str1
+    end_index = 0
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+                if dp[i][j] > max_len:
+                    max_len = dp[i][j]
+                    end_index = i - 1
+            else:
+                dp[i][j] = 0
+
+    # Extract the longest common substring
+    longest_common_sub = str1[end_index - max_len + 1: end_index + 1]
+
+    return longest_common_sub
+
+# Example usage
+str1 = "AAAACTGCTACCGGT"
+str2 = "CTGAATCTACTGCTATTGCAA"
+
+result = longest_common_substring(str1, str2)
+
+print(f"The longest common substring is: {result}")
